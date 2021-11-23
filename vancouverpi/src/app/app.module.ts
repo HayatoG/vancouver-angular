@@ -6,12 +6,16 @@ import { AppComponent } from './app.component';
 import { SobreComponent } from './views/sobre/sobre.component';
 import { ClienteComponent } from './views/cliente/cliente.component';
 import { FormsModule } from '@angular/forms';
+import { CategoriaComponent } from './views/categoria/categoria.component';
+import { ItemComponent } from './views/item/item.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SobreComponent,
-    ClienteComponent
+    ClienteComponent,
+    CategoriaComponent,
+    ItemComponent
   ],
   imports: [
     BrowserModule,
