@@ -1,1 +1,30 @@
-<p>item works!</p>
+<div>
+    <h2>Gerenciamento de Itens</h2>
+
+    <ul class="menu">
+        <li (click)="novoItem()">
+            Novo Item
+        </li>
+    </ul>
+
+
+    <ul class = "lista-clientes">
+        <li *ngFor="let item of items">
+             <span class ="botao-editar" (click)="selecionarItem(item)">{{item.nome_item}} - {{item.preco_item}} - {{item.descricao}} - {{item.disponivel}} - {{item.foto}} - {{item.id_usuario}} - {{item.id_categoria}}</span>
+             <span class="botao-excluir" (click)="excluir(item)">x</span>
+        </li>
+    </ul>
+
+    <div *ngIf="itemEdicao">
+        <h3>Inserir/Editar</h3>
+        <input placeholder="Nome" [(ngModel)]="itemEdicao.nome_item"> <br>
+        <input placeholder="Preço" [(ngModel)]="itemEdicao.preco_item"> <br>
+        <input placeholder="Descrição" [(ngModel)]="itemEdicao.descricao"> <br>
+        <input placeholder="Disponível" [(ngModel)]="itemEdicao.disponivel"> <br>
+        <input placeholder="Foto" [(ngModel)]="itemEdicao.foto"> <br>
+        <input placeholder="Usuário" [(ngModel)]="itemEdicao.id_usuario"> <br>
+        <input placeholder="Categoria" [(ngModel)]="itemEdicao.id_categoria"> <br>
+        <button (click)="salvar()"> Salvar </button>
+        <button (click)="cancelar()"> Cancelar</button>
+    </div>
+</div>
