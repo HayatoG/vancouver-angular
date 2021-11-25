@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Item } from 'src/app/model/item';
 import { ItemService } from 'src/app/services/item.service';
+import { Cliente } from 'src/app/model/cliente';
+import { Categoria } from 'src/app/model/categoria';
 
 @Component({
   selector: 'app-item',
@@ -13,16 +15,61 @@ export class ItemComponent implements OnInit {
   itemEdicao?: Item = undefined;
   estaEditando = false;
 
+  textomod:string | undefined;
+  textomodCate: string | undefined;
+
+  clientes = new Array <Cliente>();
+  clienteEdicao?: Number;
+
+  categorias = new Array <Categoria>();
+  categoriaEdicao?: Number;
+
   constructor(private ItemService:ItemService) { }
 
 
+  
+
   ngOnInit(): void {
     this.listarItem();
+    this.listarClientes();
+    this.listarCategoria();
   }
+
+  selecionaCliente(val:any){
+    this.salvaIdCliente(val);
+  }
+
+  salvaIdCliente(val:any){
+    this.textomod = "O valor " + val + " foi selecionado na lista"
+  }
+
+
+
+  selecionaCategoria(valor:any){
+    this.salvaIdCategoria(valor);
+  }
+
+  salvaIdCategoria(valor:any){
+    this.textomodCate = "O valor da categoria " + valor + " foi selecionado na lista"
+  }
+
+
 
   listarItem(): void{
     this.ItemService.listarItem().subscribe(items => {
       this.items = items;
+    });
+  }
+
+  listarClientes(): void{
+    this.ItemService.listarCliente().subscribe(clientes => {
+      this.clientes = clientes;
+    });
+  }
+
+  listarCategoria(): void{
+    this.ItemService.listarCategorias().subscribe(categoria => {
+      this.categorias = categoria;
     });
   }
 
@@ -31,7 +78,7 @@ export class ItemComponent implements OnInit {
       return
     }
     if(!this.estaEditando){
-    this.ItemService.inserirItem(this.itemEdicao).subscribe(() => {
+    this.ItemService.inserir(this.itemEdicao).subscribe(() => {
       this.listarItem();
       this.cancelar ();
     });

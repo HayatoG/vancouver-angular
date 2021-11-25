@@ -15,6 +15,8 @@
         </li>
     </ul>
 
+
+    
     <div *ngIf="itemEdicao">
         <h3>Inserir/Editar</h3>
         <input placeholder="Nome" [(ngModel)]="itemEdicao.nome_item"> <br>
@@ -22,8 +24,19 @@
         <input placeholder="Descrição" [(ngModel)]="itemEdicao.descricao"> <br>
         <input placeholder="Disponível" [(ngModel)]="itemEdicao.disponivel"> <br>
         <input placeholder="Foto" [(ngModel)]="itemEdicao.foto"> <br>
-        <input placeholder="Usuário" [(ngModel)]="itemEdicao.id_usuario"> <br>
-        <input placeholder="Categoria" [(ngModel)]="itemEdicao.id_categoria"> <br>
+
+        <select [(ngModel)]="clienteEdicao" (ngModelChange)="selecionaCliente($event)" [(ngModel)]="itemEdicao.id_usuario"> <br>
+            <option *ngFor="let cliente of clientes" [value]="cliente.id_usuario">
+                {{cliente.nome_usuario}}
+            </option>
+        </select> <br> 
+    
+        <select [(ngModel)]="categoriaEdicao" (ngModelChange)="selecionaCategoria($event)" [(ngModel)]="itemEdicao.id_categoria"> <br>
+            <option *ngFor="let categoria of categorias" [value]="categoria.id_categoria">
+                {{categoria.nome_categoria}}
+            </option>
+        </select> <br>
+       
         <button (click)="salvar()"> Salvar </button>
         <button (click)="cancelar()"> Cancelar</button>
     </div>
