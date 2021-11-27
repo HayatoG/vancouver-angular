@@ -8,6 +8,7 @@ import { ClienteComponent } from './views/cliente/cliente.component';
 import { FormsModule } from '@angular/forms';
 import { CategoriaComponent } from './views/categoria/categoria.component';
 import { ItemComponent } from './views/item/item.component';
+import { ReservaComponent } from './views/reserva/reserva.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { ItemComponent } from './views/item/item.component';
     SobreComponent,
     ClienteComponent,
     CategoriaComponent,
-    ItemComponent
+    ItemComponent,
+    ReservaComponent
   ],
   imports: [
     BrowserModule,

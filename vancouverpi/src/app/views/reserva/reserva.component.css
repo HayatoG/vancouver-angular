@@ -1,0 +1,51 @@
+.botao-excluir{
+    float: right;
+    background-color: red;
+    padding: 5px;
+    margin-top: -32px;
+    margin-right: 5px;
+    width: 20px;
+    height: 20px;
+    border-radius: 20px;
+    text-align: center;
+}
+
+.botao-excluir:hover{
+    transition: 1s;
+    background-color:indigo;
+}
+
+.botao-editar{
+    display: block;
+    width: calc(100% - 30px);
+    height: 35px;
+    line-height: 35px;
+    margin-left: 10px;
+}
+
+.lista-clientes li{
+    background-color:hotpink;
+    padding: 10px;
+    margin: 10px;
+    margin-left: 0;
+    border-radius: 25px;
+    box-shadow: black;
+    cursor: pointer;
+    transition: background-color 1s;
+}
+
+select{
+    padding: 7px 40px 9px 12px;
+    margin: 5px;
+    width: 10%;
+    border: 1px solid;
+    border-radius: 5px;
+    background: white;
+    box-shadow: 0 1px 3px -2px #9098A9;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 16px;
+    transition: all 150ms ease;
+    color: #5A667F;
+}
+
