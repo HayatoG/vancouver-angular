@@ -27,7 +27,7 @@ export class ReservaComponent implements OnInit {
   categoriaEdicao?: Number;
 
   reservas = new Array <Reserva>();
-  reservasEdicao?: Item = undefined;
+  reservasEdicao?: Reserva = undefined;
 
   constructor(private ReservaService:ReservaService) { }
 
@@ -49,7 +49,6 @@ export class ReservaComponent implements OnInit {
   }
 
 
-
   selecionaCategoria(valor:any){
     this.salvaIdCategoria(valor);
   }
@@ -57,8 +56,6 @@ export class ReservaComponent implements OnInit {
   salvaIdCategoria(valor:any){
     this.textomodCate = "O valor da categoria " + valor + " foi selecionado na lista"
   }
-
-
 
   listarItem(): void{
     this.ReservaService.listarItem().subscribe(items => {
@@ -79,24 +76,24 @@ export class ReservaComponent implements OnInit {
   }
 
   listarReserva(): void{
-    this.ReservaService.listarReserva().subscribe(reserva => {
-      this.reserva = reserva;
+    this.ReservaService.listarReserva().subscribe(reservas => {
+      this.reservas = reservas;
     })
   }
 
   salvar(): void{
-    if (this.itemEdicao == undefined){
+    if (this.reservasEdicao == undefined){
       return
     }
     if(!this.estaEditando){
-      this.ReservaService.inserir(this.itemEdicao).subscribe(() => {
-      this.listarItem();
-      this.cancelar ();
+      this.ReservaService.inserir(this.reservasEdicao).subscribe(() => {
+      this.listarReserva();
+      this.cancelar();
     });
   }
   else{
-      this.ReservaService.atualizar(this.itemEdicao).subscribe(()=>{
-         this.listarItem();
+      this.ReservaService.atualizar(this.reservasEdicao).subscribe(()=>{
+         this.listarReserva();
          this.cancelar();
          this.estaEditando=false;
       });
@@ -118,15 +115,21 @@ export class ReservaComponent implements OnInit {
     this.estaEditando = true;
   }
 
-  novaReserva(){
-    this.reservasEdicao = new Reserva ();
+  selecionarReserva(reserva:Reserva){
+    this.reservasEdicao = reserva;
+    this.estaEditando = true;
   }
 
-  excluir(item: Item){
-    const resposta = confirm(`Confirma a exclusão de ${item.nome_item}`);
-    if(resposta && item && item.id_item){
-      this.ItemService.excluir(item.id_item).subscribe(() => {
-        this.listarItem();
+  novaReserva(){
+    this.reservasEdicao = new Reserva ();
+    this.estaEditando = true;
+  }
+
+  excluir(reserva: Reserva){
+    const resposta = confirm(`Confirma a exclusão de ${reserva.id_reserva}`);
+    if(resposta && reserva && reserva.id_reserva){
+      this.ReservaService.excluir(reserva.id_reserva).subscribe(() => {
+        this.listarReserva();
       });
     }
   }
