@@ -22,8 +22,6 @@
         <input placeholder="Preço (1 dia):" [(ngModel)]="reservasEdicao.preco_reserva"> <br>
         <input placeholder="Data de reserva:" [(ngModel)]="reservasEdicao.data_reserva"> <br>
         <input placeholder="Data de devolução" [(ngModel)]="reservasEdicao.data_devolucao"> <br>
-        <!-- <input placeholder="Disponível" [(ngModel)]="reservaEdicao.disponivel"> <br>
-        <input placeholder="Foto" [(ngModel)]="reservaEdicao.foto"> <br> -->
 
         <select [(ngModel)]="clienteEdicao" (ngModelChange)="selecionaCliente($event)" [(ngModel)]="reservasEdicao.id_usuario"> <br>
             <option *ngFor="let cliente of clientes" [value]="cliente.id_usuario">
@@ -33,7 +31,7 @@
     
         <select [(ngModel)]="itemEdicao" (ngModelChange)="selecionarItem($event)" [(ngModel)]="reservasEdicao.id_item"> <br>
             <option *ngFor="let item of items" [value]="item.id_categoria">
-                {{item.nome_item}}
+                {{item.nome_item}}, Preço: {{item.preco_item}}
             </option>
         </select> <br>
        
