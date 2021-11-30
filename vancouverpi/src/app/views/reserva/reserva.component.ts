@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Item } from 'src/app/model/item';
-import { ItemService } from 'src/app/services/item.service';
 import { Cliente } from 'src/app/model/cliente';
 import { Categoria } from 'src/app/model/categoria';
 import { Reserva } from 'src/app/model/reserva';
@@ -13,48 +12,44 @@ import { ReservaService } from 'src/app/services/reserva.service';
 })
 export class ReservaComponent implements OnInit {
 
-  items = new Array<Item>();
-  itemEdicao?: Item = undefined;
+  reservas = new Array <Reserva>();
+  reservasEdicao?: Reserva = undefined;
   estaEditando = false;
 
-  textomod:string | undefined;
-  textomodCate: string | undefined;
+  textomodCliente:string | undefined;
+  textomodItem: string | undefined;
 
   clientes = new Array <Cliente>();
   clienteEdicao?: Number;
 
+  items = new Array <Item>();
+  itemEdicao?: Number;
+
   categorias = new Array <Categoria>();
   categoriaEdicao?: Number;
 
-  reservas = new Array <Reserva>();
-  reservasEdicao?: Reserva = undefined;
-
   constructor(private ReservaService:ReservaService) { }
 
-  
-
   ngOnInit(): void {
+    this.listarReserva();
     this.listarItem();
     this.listarClientes();
-    this.listarCategoria();
-    this.listarReserva();
   }
 
-  selecionaCliente(val:any){
+  selecionarIdCliente(val:any){
     this.salvaIdCliente(val);
   }
 
   salvaIdCliente(val:any){
-    this.textomod = "O valor " + val + " foi selecionado na lista"
+    this.textomodCliente = "O valor " + val + " foi selecionado na lista"
   }
 
-
-  selecionaCategoria(valor:any){
-    this.salvaIdCategoria(valor);
+  selecionarIdItem(valor:any){
+    this.salvaIdItem(valor);
   }
 
-  salvaIdCategoria(valor:any){
-    this.textomodCate = "O valor da categoria " + valor + " foi selecionado na lista"
+  salvaIdItem(valor:any){
+    this.textomodItem = "O valor do Item " + valor + " foi selecionado na lista"
   }
 
   listarItem(): void{
@@ -66,12 +61,6 @@ export class ReservaComponent implements OnInit {
   listarClientes(): void{
     this.ReservaService.listarCliente().subscribe(clientes => {
       this.clientes = clientes;
-    });
-  }
-
-  listarCategoria(): void{
-    this.ReservaService.listarCategorias().subscribe(categoria => {
-      this.categorias = categoria;
     });
   }
 
@@ -100,8 +89,8 @@ export class ReservaComponent implements OnInit {
     }
   }
 
-  novoItem(){
-    this.itemEdicao = new Item();
+  novaReserva(){
+    this.reservasEdicao = new Reserva();
     this.estaEditando = false;
   }
 
@@ -110,18 +99,8 @@ export class ReservaComponent implements OnInit {
     this.estaEditando = false;
   }
 
-  selecionarItem(item:Item){
-    this.itemEdicao = item;
-    this.estaEditando = true;
-  }
-
   selecionarReserva(reserva:Reserva){
     this.reservasEdicao = reserva;
-    this.estaEditando = true;
-  }
-
-  novaReserva(){
-    this.reservasEdicao = new Reserva ();
     this.estaEditando = true;
   }
 

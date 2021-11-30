@@ -1,5 +1,5 @@
 export class Item{
-    id_item?:number;
+    id_item?: number;
     nome_item?: string;
     preco_item?: number;
     descricao?: string;

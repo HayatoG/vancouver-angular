@@ -21,20 +21,16 @@ export class ReservaService {
     return this.http.get<Cliente[]>('http://localhost:8080/vancouver/webapi/usuario');
   }
 
-  listarCategorias(): Observable<Categoria[]> {
-    return this.http.get<Categoria[]>('http://localhost:8080/vancouver/webapi/categoria')
+  listarReserva(): Observable<Reserva[]> {
+    return this.http.get<Reserva[]>('http://localhost:8080/vancouver/webapi/reserva')
   }
 
   inserir(reserva: Reserva): Observable<void>{
     return this.http.post<void>('http://localhost:8080/vancouver/webapi/reserva', reserva)
   }
 
-  listarReserva(): Observable<Reserva[]> {
-    return this.http.get<Reserva[]>('http://localhost:8080/vancouver/webapi/reserva')
-  }
-
-  atualizar(item: Item): Observable <void>{
-    return this.http.put<void>('http://localhost:8080/vancouver/webapi/item', item);
+  atualizar(reserva: Reserva): Observable <void>{
+    return this.http.put<void>('http://localhost:8080/vancouver/webapi/reserva', reserva);
   }
 
   excluir(id_reserva: number): Observable<void>{
