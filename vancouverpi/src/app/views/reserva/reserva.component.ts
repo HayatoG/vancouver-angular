@@ -13,20 +13,34 @@ import { ReservaService } from 'src/app/services/reserva.service';
 export class ReservaComponent implements OnInit {
 
   reservas = new Array <Reserva>();
-  reservasEdicao?: Reserva = undefined;
+  reservasEdicao?: Reserva;
   estaEditando = false;
 
-  textomodCliente:string | undefined;
+  textomodCliente: string | undefined;
+
   textomodItem: string | undefined;
+
+  textomodValorFinal: number = 0;
+
+  textomodValorItem: number = 0;
+
+  textomodReserva = new Date();
+  textomodDevolucao = new Date();
 
   clientes = new Array <Cliente>();
   clienteEdicao?: Number;
 
   items = new Array <Item>();
   itemEdicao?: Number;
-
+ 
   categorias = new Array <Categoria>();
   categoriaEdicao?: Number;
+
+  dataRes = Date(); 
+  dataDev= Date();
+
+
+  testeNessaPorra: number | undefined;
 
   constructor(private ReservaService:ReservaService) { }
 
@@ -111,6 +125,49 @@ export class ReservaComponent implements OnInit {
         this.listarReserva();
       });
     }
+  }
+
+  selecionarValorReserva(valReserva:Date){
+    this.salvaValorReserva(valReserva);
+  }
+
+  salvaValorReserva(valorReserva:Date){
+    this.textomodReserva = valorReserva;
+  }
+
+  selecionarValorDevolucao(valDevolucao:Date){
+    this.salvaValorDevolucao(valDevolucao);
+  }
+
+  salvaValorDevolucao(valorDevolucao:Date){
+    this.textomodDevolucao = valorDevolucao;
+  }
+
+  selecionarValorItem(valItem:any){
+    this.salvaValorItem(valItem);
+  }
+
+  salvaValorItem(valorItem:any){
+    this.textomodValorItem = valorItem;
+  }
+
+
+  calculaDiferenca(textomodDevolucao: Date, textomodReserva: Date) {
+
+    var oneDay = 1000 * 3600 * 24;
+
+    var diffInTime = textomodDevolucao.getTime() - textomodReserva.getTime();
+
+    var diff = Math.round(diffInTime / oneDay);
+
+    this.testeNessaPorra = diff;
+    
+  }
+
+  definePreco(textomodDiferenca: number) {
+
+    this.textomodValorFinal = textomodDiferenca * this.textomodValorItem;
+    
   }
 
 }

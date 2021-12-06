@@ -17,23 +17,29 @@
 
 
     
+
+    
     <div *ngIf="reservasEdicao">
         <h3>Inserir/Editar</h3>
-        <input placeholder="Preço:" [(ngModel)]="reservasEdicao.preco_reserva"> <br>
-        <input placeholder="Data de reserva:" [(ngModel)]="reservasEdicao.data_reserva"> <br>
-        <input placeholder="Data de devolução" [(ngModel)]="reservasEdicao.data_devolucao"> <br>
-
-        <select [(ngModel)]="clienteEdicao" (ngModelChange)="selecionarIdCliente($event)" [(ngModel)]="reservasEdicao.id_usuario"> <br>
-            <option *ngFor="let cliente of clientes" [value]="cliente.id_usuario">
-                {{cliente.nome_usuario}}
-            </option>
-        </select> <br> 
-    
+        
         <select [(ngModel)]="itemEdicao" (ngModelChange)="selecionarIdItem($event)" [(ngModel)]="reservasEdicao.id_item"> <br>
             <option *ngFor="let item of items" [value]="item.id_item">
                 {{item.nome_item}}, Preço: {{item.preco_item}}
             </option>
         </select> <br>
+
+        <input type="date" placeholder="Data de reserva:" [(ngModel)]="reservasEdicao.data_reserva" (ngModelChange)="selecionarValorReserva($event)"> <br>
+        <input type="date" placeholder="Data de devolução" [(ngModel)]="reservasEdicao.data_devolucao" (ngModelChange)="selecionarValorDevolucao($event)" (ngModelChange)="calculaDiferenca(textomodDevolucao, textomodReserva)"> <br>
+
+        {{testeNessaPorra}}
+        
+        <select [(ngModel)]="clienteEdicao" (ngModelChange)="selecionarIdCliente($event)" [(ngModel)]="reservasEdicao.id_usuario"> <br>
+            <option *ngFor="let cliente of clientes" [value]="cliente.id_usuario">
+                {{cliente.nome_usuario}}
+            </option>
+        </select> <br> 
+
+        <input placeholder="Preço:" [(ngModel)]="reservasEdicao.preco_reserva"> <br>
        
         <button (click)="salvar()"> Salvar </button>
         <button (click)="cancelar()"> Cancelar</button>
