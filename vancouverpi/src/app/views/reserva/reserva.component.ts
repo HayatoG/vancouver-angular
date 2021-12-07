@@ -40,7 +40,7 @@ export class ReservaComponent implements OnInit {
   dataDev= Date();
 
 
-  testeNessaPorra: number | undefined;
+  testeReserva: number | undefined;
 
   constructor(private ReservaService:ReservaService) { }
 
@@ -160,7 +160,7 @@ export class ReservaComponent implements OnInit {
 
     var diff = Math.round(diffInTime / oneDay);
 
-    this.testeNessaPorra = diff;
+    this.testeReserva = diff;
     
   }
 
